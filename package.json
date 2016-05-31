@@ -4,7 +4,8 @@
   "description": "Package to fetch user avatars from various social-sites",
   "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register"
+    "test": "./node_modules/.bin/mocha --compilers js:babel-core/register",
+    "build": "./node_modules/.bin/babel src --out-dir lib/"
   },
   "keywords": [
     "avatar",
@@ -22,10 +23,12 @@
   },
   "devDependencies": {
     "babel": "^6.5.2",
+    "babel-cli": "^6.9.0",
     "babel-preset-es2015": "^6.9.0",
     "babel-register": "^6.9.0",
     "bluebird": "^3.4.0",
     "chai": "^3.5.0",
+    "chai-spies": "^0.7.1",
     "mocha": "^2.5.3"
   }
 }
