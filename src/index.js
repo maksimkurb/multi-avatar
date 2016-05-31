@@ -5,7 +5,7 @@ export { FacebookAvatarProvider, TwitterAvatarProvider, GoogleAvatarProvider };
 
 class MultiAvatar {
   constructor(providers) {
-    this.providers = providers;
+    this.providers = (Array.isArray(providers) ? providers : [providers]);
   }
 
   requestAll(size) {

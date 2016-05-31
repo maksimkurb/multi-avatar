@@ -4,8 +4,16 @@
   "description": "Package to fetch user avatars from various social-sites",
   "main": "lib/index.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --require=any-promise/register/bluebird --compilers js:babel-register",
-    "build": "./node_modules/.bin/babel src --out-dir lib/"
+    "build": "./node_modules/.bin/babel src --out-dir lib/",
+    "test": "./node_modules/.bin/mocha --require=any-promise/register/bluebird --compilers js:babel-register"
+  },
+  "pre-commit": [
+    "build",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maksimkurb/multi-avatar.git"
   },
   "keywords": [
     "avatar",
@@ -29,6 +37,7 @@
     "bluebird": "^3.4.0",
     "chai": "^3.5.0",
     "chai-spies": "^0.7.1",
-    "mocha": "^2.5.3"
+    "mocha": "^2.5.3",
+    "pre-commit": "^1.1.3"
   }
 }

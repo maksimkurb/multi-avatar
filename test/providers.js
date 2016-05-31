@@ -3,13 +3,13 @@ import spies from 'chai-spies';
 chai.use(spies);
 should();
 
-import MultiAvatar, {FacebookAvatarProvider, GoogleAvatarProvider} from '../src/';
+import multiAvatar, {FacebookAvatarProvider, GoogleAvatarProvider} from '../src/';
 
 describe('Provider', function () {
   describe('#facebook', function () {
     it('should return only facebook picture URL', () => {
 
-      return MultiAvatar([
+      return multiAvatar([
         new FacebookAvatarProvider(100008343750912)
       ])
       .withSize(64)
@@ -23,7 +23,7 @@ describe('Provider', function () {
 
     it('should return multiple avatar urls for different sizes', () => {
 
-      return MultiAvatar([
+      return multiAvatar([
         new FacebookAvatarProvider('100008343750912')
       ])
       .withSizes([64, 128])
@@ -41,7 +41,7 @@ describe('Provider', function () {
     it('should fetch google picture url by API and return avatar successfully', () => {
       this.timeout(5000);
 
-      return MultiAvatar([
+      return multiAvatar([
         googleAvatarProvider
       ])
       .withSize(256)
@@ -63,7 +63,7 @@ describe('Provider', function () {
     it('should return avatar by url in cache immediately', () => {
       this.timeout(50);
 
-      return MultiAvatar([
+      return multiAvatar([
         googleAvatarProvider
       ])
       .withSize(512)
@@ -76,7 +76,7 @@ describe('Provider', function () {
     });
 
     it('should return multiple pictures in the same time (or less) as it fetching url from API first time', () => {
-      return MultiAvatar([
+      return multiAvatar([
         new GoogleAvatarProvider('116933859726289749306')
       ])
       .withSizes([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
