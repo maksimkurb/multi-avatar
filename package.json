@@ -10,7 +10,7 @@
   },
   "pre-commit": [
     "build",
-    "addBuildedFiles"
+    "addBuildedFiles",
     "test"
   ],
   "repository": {
