@@ -1,8 +1,6 @@
-const log = function(t) {
-  process.stdout.write(t + '\n');
-};
-
-import {should} from 'chai';
+import chai, { should } from 'chai';
+import spies from 'chai-spies';
+chai.use(spies);
 should();
 
 import MultiAvatar, {FacebookAvatarProvider, GoogleAvatarProvider} from '../src/';
@@ -38,6 +36,7 @@ describe('Provider', function () {
   });
 
   const googleAvatarProvider = new GoogleAvatarProvider('116933859726289749306');
+  const googleAvatarProviderSpy = chai.spy.on(googleAvatarProvider, 'avatar');
   describe('#google', function() {
     it('should fetch google picture url by API and return avatar successfully', () => {
       this.timeout(5000);
@@ -50,6 +49,7 @@ describe('Provider', function () {
         value.should.have.all.keys(['google']);
         value.google.should.be.a('string')
           .and.have.string('s256');
+        googleAvatarProviderSpy.should.have.been.called.once();
       });
 
     });
