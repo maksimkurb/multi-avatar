@@ -5,10 +5,12 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "./node_modules/.bin/babel src --out-dir lib/",
+    "add-builded-files": "git add lib/*",
     "test": "./node_modules/.bin/mocha --require=any-promise/register/bluebird --compilers js:babel-register"
   },
   "pre-commit": [
     "build",
+    "add-builded-files"
     "test"
   ],
   "repository": {
