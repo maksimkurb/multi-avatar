@@ -50,6 +50,6 @@ class MultiAvatar {
   }
 }
 
-module.exports = function(providers) {
+export default function(providers) {
   return new MultiAvatar(providers);
 }
