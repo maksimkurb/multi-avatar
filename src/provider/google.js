@@ -2,7 +2,7 @@ import Promise from 'any-promise';
 import fetch from 'node-fetch';
 fetch.Promise = Promise;
 
-export default class {
+module.exports = class {
   constructor(googleId) {
     this.googleId = googleId;
     this.pictureUrl = null;

@@ -1,13 +1,9 @@
-import FacebookAvatarProvider from './providers/facebook';
-import GoogleAvatarProvider from './providers/google';
-import TwitterAvatarProvider from './providers/twitter';
-
 module.exports = function(providers) {
   return new MultiAvatar(providers);
 }
-module.exports.FacebookAvatarProvider = FacebookAvatarProvider;
-module.exports.GoogleAvatarProvider = GoogleAvatarProvider;
-module.exports.TwitterAvatarProvider = TwitterAvatarProvider;
+module.exports.FacebookAvatarProvider = require('./provider/facebook')
+module.exports.GoogleAvatarProvider = require('./provider/google')
+module.exports.TwitterAvatarProvider = require('./provider/twitter')
 
 class MultiAvatar {
   constructor(providers) {

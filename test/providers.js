@@ -3,7 +3,9 @@ import spies from 'chai-spies';
 chai.use(spies);
 should();
 
-import multiAvatar, {FacebookAvatarProvider, GoogleAvatarProvider} from '../src/';
+import multiAvatar from '../src/';
+import FacebookAvatarProvider from '../src/provider/facebook';
+import GoogleAvatarProvider from '../src/provider/google';
 
 describe('Provider', function () {
   describe('#facebook', function () {

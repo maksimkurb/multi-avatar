@@ -1,6 +1,6 @@
 import Promise from 'any-promise';
 
-export default class {
+module.exports = class {
   constructor(twitterName) {
     this.twitterName = twitterName;
   }
