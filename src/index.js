@@ -1,7 +1,13 @@
 import FacebookAvatarProvider from './providers/facebook';
-import TwitterAvatarProvider from './providers/twitter';
 import GoogleAvatarProvider from './providers/google';
-export { FacebookAvatarProvider, TwitterAvatarProvider, GoogleAvatarProvider };
+import TwitterAvatarProvider from './providers/twitter';
+
+module.exports = function(providers) {
+  return new MultiAvatar(providers);
+}
+module.exports.FacebookAvatarProvider = FacebookAvatarProvider;
+module.exports.GoogleAvatarProvider = GoogleAvatarProvider;
+module.exports.TwitterAvatarProvider = TwitterAvatarProvider;
 
 class MultiAvatar {
   constructor(providers) {
@@ -48,8 +54,4 @@ class MultiAvatar {
       }, {});
     })
   }
-}
-
-export default function(providers) {
-  return new MultiAvatar(providers);
 }
