@@ -21,6 +21,10 @@ This library allows you to get user avatar URLs from various social-networks wit
 ```js
   new TwitterAvatarProvider('TwitterUsername') // without '@', e.g. 'IGN' or 'pcgamer'
 ```
+* Vkontakte
+```js
+  new VkAvatarProvider('VkID')
+```
 
 ## Installation
 ```
@@ -101,7 +105,21 @@ multiAvatar([
     // }
   });
 
+  // Error handling:
+  multiAvatar(new GoogleAvatarProvider('non_exists_user'))
+    .withSize(64)
+    .then(function (avatars) {
+      console.log(avatars);
+      // {
+      //   google: null
+      // }
+    });
+
 ```
+__NOTE__: *only google and vk can return null, because they
+depends on JSON-request, so we can determine,
+that user is not exists. Other providers just return
+broken image or something like that.*
 
 ## Contribute
 1. Fork it!
