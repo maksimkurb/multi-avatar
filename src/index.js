@@ -12,7 +12,7 @@ class MultiAvatar {
 
   requestAll(size) {
     return Promise.all(
-      this.providers.map((provider) => provider.avatar(size))
+      this.providers.map((provider) => provider.avatar(size).catch(e => null))
     );
   }
 
