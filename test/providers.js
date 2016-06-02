@@ -96,8 +96,8 @@ describe('Provider', function () {
       .withSize(256)
       .then(function (value) {
         expect(value).to.have.all.keys(['vk']);
-        expect(value.google).to.be.a('string')
-          .and.have.string('s256');
+        expect(value.vk).to.be.a('string')
+          .and.have.string('http');
         expect(vkAvatarProviderSpy).to.have.been.called.once();
       });
     });
