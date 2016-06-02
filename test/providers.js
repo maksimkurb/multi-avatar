@@ -1,7 +1,6 @@
-import chai, { should } from 'chai';
+import chai, { expect } from 'chai';
 import spies from 'chai-spies';
 chai.use(spies);
-should();
 
 import multiAvatar from '../src/';
 import FacebookAvatarProvider from '../src/provider/facebook';
@@ -12,12 +11,12 @@ describe('Provider', function () {
     it('should return only facebook picture URL', () => {
 
       return multiAvatar([
-        new FacebookAvatarProvider(100008343750912)
+        new FacebookAvatarProvider('100008343750912')
       ])
       .withSize(64)
       .then(function (value) {
-        value.should.have.all.keys(['facebook']);
-        value.facebook.should.be.a('string')
+        expect(value).to.have.all.keys(['facebook']);
+        expect(value.facebook).to.be.a('string')
           .and.have.string('100008343750912');
       });
 
@@ -30,8 +29,8 @@ describe('Provider', function () {
       ])
       .withSizes([64, 128])
       .then(function (value) {
-        value.should.have.all.keys(['facebook']);
-        value.facebook.should.have.all.keys(['64', '128']);
+        expect(value).to.have.all.keys(['facebook']);
+        expect(value.facebook).to.have.all.keys(['64', '128']);
       });
 
     });
@@ -48,17 +47,17 @@ describe('Provider', function () {
       ])
       .withSize(256)
       .then(function (value) {
-        value.should.have.all.keys(['google']);
-        value.google.should.be.a('string')
+        expect(value).to.have.all.keys(['google']);
+        expect(value.google).to.be.a('string')
           .and.have.string('s256');
-        googleAvatarProviderSpy.should.have.been.called.once();
+        expect(googleAvatarProviderSpy).to.have.been.called.once();
       });
 
     });
 
     it('should contain cached url', () => {
-      googleAvatarProvider.should.have.property('pictureUrl');
-      googleAvatarProvider.pictureUrl.should.be.a('string')
+      expect(googleAvatarProvider).to.have.property('pictureUrl');
+      expect(googleAvatarProvider.pictureUrl).to.be.a('string')
         .and.have.string('s64');
     });
 
@@ -70,8 +69,8 @@ describe('Provider', function () {
       ])
       .withSize(512)
       .then(function (value) {
-        value.should.have.all.keys(['google']);
-        value.google.should.be.a('string')
+        expect(value).to.have.all.keys(['google']);
+        expect(value.google).to.be.a('string')
           .and.have.string('s512');
       });
 
@@ -83,8 +82,22 @@ describe('Provider', function () {
       ])
       .withSizes([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
       .then(function (value) {
-        value.should.have.all.keys(['google']);
-        value.google.should.have.all.keys(['10', '20', '30', '40', '50', '60', '70', '80', '90', '100']);
+        expect(value).to.have.all.keys(['google']);
+        expect(value.google).to.have.all.keys(['10', '20', '30', '40', '50', '60', '70', '80', '90', '100']);
+      });
+    });
+
+
+
+    it('should return null, if user is not exists', () => {
+      return multiAvatar([
+        new GoogleAvatarProvider('notexists'),
+        new FacebookAvatarProvider('100008343750912')
+      ])
+      .withSize(50)
+      .then(function (value) {
+        expect(value).to.have.all.keys(['google', 'facebook']);
+        expect(value.google).to.be.null;
 
       })
     });
