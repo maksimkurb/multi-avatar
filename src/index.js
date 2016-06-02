@@ -4,6 +4,7 @@ module.exports = function(providers) {
 module.exports.FacebookAvatarProvider = require('./provider/facebook')
 module.exports.GoogleAvatarProvider = require('./provider/google')
 module.exports.TwitterAvatarProvider = require('./provider/twitter')
+module.exports.VkAvatarProvider = require('./provider/vk')
 
 class MultiAvatar {
   constructor(providers) {
@@ -12,7 +13,7 @@ class MultiAvatar {
 
   requestAll(size) {
     return Promise.all(
-      this.providers.map((provider) => provider.avatar(size))
+      this.providers.map((provider) => provider.avatar(size).catch(e => null))
     );
   }
 

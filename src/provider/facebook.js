@@ -11,9 +11,9 @@ module.exports = class {
 
   avatar(size) {
     return new Promise((resolve) => {
-      if (!this.facebookId) resolve(null);
+      if (!this.facebookId) return reject(new Error('Facebook user ID is not specified'));
 
-      resolve(`https://graph.facebook.com/${this.facebookId}/picture?width=${size}`);
+      return resolve(`https://graph.facebook.com/${this.facebookId}/picture?width=${size}`);
     });
   }
 }
