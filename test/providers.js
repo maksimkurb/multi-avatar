@@ -71,6 +71,8 @@ describe('Provider', function () {
     });
 
     it('should return multiple pictures in the same time (or less) as it fetching url from API first time', () => {
+      this.timeout(5000);
+
       return multiAvatar([
         new GoogleAvatarProvider('116933859726289749306')
       ])
@@ -137,6 +139,8 @@ describe('Provider', function () {
     });
 
     it('should return multiple pictures in the same time (or less) as it fetching url from API first time', () => {
+      this.timeout(5000);
+
       return multiAvatar([
         new VkAvatarProvider('1')
       ])
@@ -147,6 +151,18 @@ describe('Provider', function () {
       })
     });
 
+    it('should return null, if user is not exists', () => {
+      return multiAvatar([
+        new VkAvatarProvider('notexists'),
+        new FacebookAvatarProvider('100008343750912')
+      ])
+      .withSize(50)
+      .then(function (value) {
+        expect(value).to.have.all.keys(['vk', 'facebook']);
+        expect(value.vk).to.be.null;
+
+      })
+    });
 
   })
 

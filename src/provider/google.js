@@ -8,6 +8,7 @@ module.exports = class {
     this.timeout = timeout;
 
     this.pictureUrl = null;
+    this.error = false;
   }
 
   providerName() {
@@ -16,7 +17,8 @@ module.exports = class {
 
   avatar(size) {
     return (new Promise((resolve, reject) => {
-      if (!this.googleId) reject(new Error('Google user ID is not specified'));
+      if (!this.googleId) return reject(new Error('Google user ID is not specified'));
+      if (!!this.error) return reject(this.error);
 
       if (!this.pictureUrl) {
         fetch(`https://picasaweb.google.com/data/entry/api/user/${this.googleId}?alt=json&fields=gphoto:thumbnail`, {
@@ -24,19 +26,22 @@ module.exports = class {
         })
         .then((res) => {
           if (res.status < 200 || res.status > 299) {
-            reject(new Error(res.statusText));
+            if (res.status > 399 && res.status < 500) {
+              this.error = new Error(res.statusText);
+            }
+            return reject(new Error(res.statusText));
           }
           return res.json();
         })
         .then((data) => {
           this.pictureUrl = data.entry.gphoto$thumbnail.$t;
-          resolve(this.pictureUrl);
+          return resolve(this.pictureUrl);
         })
         .catch((err) => {
-          reject(err);
+          return reject(err);
         });
       } else {
-        resolve(this.pictureUrl);
+        return resolve(this.pictureUrl);
       }
     })
     .then((url) => url.replace('s64', 's' + size)));
