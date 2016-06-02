@@ -11,7 +11,7 @@ describe('Provider', function () {
     it('should return only facebook picture URL', () => {
 
       return multiAvatar([
-        new FacebookAvatarProvider(100008343750912)
+        new FacebookAvatarProvider('100008343750912')
       ])
       .withSize(64)
       .then(function (value) {
