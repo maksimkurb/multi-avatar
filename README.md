@@ -36,7 +36,7 @@ Some services forces us to make a API-requests. This is why library uses Promise
 _(Caching works only if you use the same instance of AvatarProvider between avatar requests)_
 
 ```js
-import multiAvatar, { FacebookAvatarProvider, GoogleAvatarProvider } from 'multi-avatar'; // ES6
+import multiAvatar, { FacebookAvatarProvider, GoogleAvatarProvider } from 'multi-avatar'; // ES7
 // or
 var multiAvatar = require('multi-avatar'),
   FacebookAvatarProvider = multiAvatar.FacebookAvatarProvider,
