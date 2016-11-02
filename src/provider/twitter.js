@@ -23,10 +23,10 @@ module.exports = class {
   }
 
   avatar(size) {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       if (!this.twitterName) return reject(new Error('Twitter user name is not specified'));
 
-      return resolve(`https://twitter.com/${this.twitterName}/profile_image?size=${getImageSize(size)}`);
+      return resolve(`https://twitter.com/${this.twitterName}/profile_image?size=${this.getImageSize(size)}`);
     });
   }
 }

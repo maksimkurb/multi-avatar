@@ -1,6 +1,6 @@
 {
   "name": "multi-avatar",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Package to fetch user avatars from various social-sites",
   "main": "lib/index.js",
   "scripts": {

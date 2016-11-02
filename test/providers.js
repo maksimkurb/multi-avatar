@@ -2,7 +2,7 @@ import chai, { expect } from 'chai';
 import spies from 'chai-spies';
 chai.use(spies);
 
-import multiAvatar, { FacebookAvatarProvider, GoogleAvatarProvider, VkAvatarProvider} from '../src/';
+import multiAvatar, { FacebookAvatarProvider, TwitterAvatarProvider, GoogleAvatarProvider, VkAvatarProvider} from '../src/';
 
 describe('Provider', function () {
   describe('#facebook', function () {
@@ -30,6 +30,30 @@ describe('Provider', function () {
     });
   });
 
+  describe('#twitter', function () {
+    it('should return twitter picture url', function() {
+      return multiAvatar([
+        new TwitterAvatarProvider('GoogleRussia')
+      ])
+      .withSize(50)
+      .then(function (value) {
+        expect(value).to.have.all.keys(['twitter']);
+        expect(value.twitter).to.be.a('string')
+          .and.be.equal('https://twitter.com/GoogleRussia/profile_image?size=bigger');
+      });
+    });
+
+    it('should return multiple avatar urls for different sizes', () => {
+      return multiAvatar([
+        new TwitterAvatarProvider('GoogleRussia')
+      ])
+      .withSizes([64, 128])
+      .then(function (value) {
+        expect(value).to.have.all.keys(['twitter']);
+        expect(value.twitter).to.have.all.keys(['64', '128']);
+      });
+    });
+  });
 
   describe('#google', function () {
     const googleAvatarProvider = new GoogleAvatarProvider('116933859726289749306');
